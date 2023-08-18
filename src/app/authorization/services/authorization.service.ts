@@ -25,7 +25,7 @@ export class AuthorizationService {
   }
 
   public login(userData: ILogIn): Observable<ITokenInterface> {
-    return this._http.post<ITokenInterface>('/api/token/login/', userData);
+    return this._http.post<ITokenInterface>('https://bookstore-api.verdgil.org/api/token/login/', userData);
   }
 
   public register(userData: ILogIn): Observable<ITokenInterface> {
