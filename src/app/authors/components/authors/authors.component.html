@@ -1,0 +1,33 @@
+<mat-form-field class="col-12 mb-0 d-block">
+    <input matInput [formControl]="control">
+    <button (click)="openAuthorInfoModal()" mat-icon-button matIconSuffix><i class="material-icons">search</i></button>
+</mat-form-field>
+<app-autocomplete class="d-block mb-20 option">
+    <mat-option *ngFor="let option of filteredAuthors | async"
+                (click)="selectedOption(option)">
+        {{ option | fullName }}
+    </mat-option>
+</app-autocomplete>
+
+<div class="row mb-10 flex-column">
+    <a class="col-6 col-md-4 align-self-center" routerLink="/authors/create" mat-button color="primary">Create
+        Author</a>
+</div>
+
+<div *ngIf="authors$ | async as authors; else noneAuthors">
+    <app-authors-list [authors]="authors"></app-authors-list>
+
+    <mat-paginator
+            class="background-primary"
+            [length]="totalItems"
+            [pageSizeOptions]="_pageSizeOptions"
+            (page)="pageEvent($event)"
+            [pageIndex]="pageIndex">
+    </mat-paginator>
+</div>
+
+<ng-template #noneAuthors>
+    <div class="d-flex justify-content-center">
+        <mat-spinner diameter="200" strokeWidth="5"></mat-spinner>
+    </div>
+</ng-template>

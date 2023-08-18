@@ -1,0 +1,105 @@
+<form [formGroup]="filterForm">
+    <div class="row">
+        <mat-form-field class="col-12 col-md-4 mb-10" appearance="fill" hintLabel="Max 25 characters">
+            <mat-label>Title</mat-label>
+            <input matInput
+                   inputLetterMask
+                   maxlength="25"
+                   formControlName="title"
+                   type="text"/>
+            <mat-hint *ngIf="title.value" align="end">{{ title.value.length }}/25</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-4 mb-10">
+            <mat-label>Authors</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="author"
+                   [matAutocomplete]="author">
+            <mat-autocomplete #author="matAutocomplete">
+                <mat-option *ngFor="let author of filteredAuthors$ | async"
+                            [value]="author | fullName">
+                    {{ author | fullName }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-4 mb-10">
+            <mat-label>Genres</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="genre"
+                   [matAutocomplete]="genre">
+            <mat-autocomplete #genre="matAutocomplete">
+                <mat-option *ngFor="let genre of filteredGenres$ | async"
+                            [value]="genre.title">
+                    {{ genre.title }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field class="col-12 col-md-6 col-lg-3 mb-10" floatLabel="always">
+            <mat-label>Price from</mat-label>
+            <input matInput
+                   class="price-field"
+                   placeholder="0"
+                   type="number"
+                   formControlName="price_gte"/>
+            <span matTextPrefix>₽</span>
+            <span matTextSuffix>.00</span>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6 col-lg-3 mb-10" floatLabel="always">
+            <mat-label>Price to</mat-label>
+            <input matInput
+                   class="price-field"
+                   placeholder="0"
+                   type="number"
+                   formControlName="price_lte"/>
+            <span matTextPrefix>₽</span>
+            <span matTextSuffix>.00</span>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6 col-lg-3 mb-10" appearance="fill">
+            <mat-label>Writing before</mat-label>
+            <input matInput
+                   inputNumberMask
+                   formControlName="writing_date_lte"
+                   [matDatepicker]="writingDatePicker">
+            <mat-datepicker-toggle matIconSuffix [for]="writingDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #writingDatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-6 col-lg-3 mb-10" appearance="fill">
+            <mat-label>Writing after</mat-label>
+            <input matInput
+                   inputNumberMask
+                   formControlName="writing_date_gte"
+                   [matDatepicker]="writingDateGtePicker">
+            <mat-datepicker-toggle matIconSuffix [for]="writingDateGtePicker"></mat-datepicker-toggle>
+            <mat-datepicker #writingDateGtePicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="d-flex justify-content-center justify-content-md-end">
+        <div class="mb-3 mb-md-0 mr-20">
+            <button mat-raised-button
+                    type="button"
+                    color="accent"
+                    (click)="clear()">
+                Clear
+            </button>
+        </div>
+
+        <div>
+            <button mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="emitObject()">
+                Apply
+            </button>
+        </div>
+    </div>
+</form>

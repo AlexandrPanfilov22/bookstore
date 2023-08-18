@@ -1,0 +1,26 @@
+<mat-card class="card container">
+    <mat-card-header>
+        <div mat-card-avatar [ngStyle]="{ 'background-image': image }" class="card-header-image"></div>
+        <mat-card-title>{{ book.title }}</mat-card-title>
+    </mat-card-header>
+
+    <div class="align-self-center flex-grow-1">
+        <img class="book-img border-radius-40" mat-card-image
+             [src]="'http://placekitten.com/g/200/200'"
+             alt="Photo of a book">
+    </div>
+
+    <mat-card-content class="mt-3 mb-3 text-center flex-grow-1">
+        <div>{{ book.description }}</div>
+    </mat-card-content>
+
+    <div class="align-self-center mb-10">
+        <a class="black-color decoration-none" routerLink="/books/{{ book.id }}">Details...</a>
+    </div>
+
+    <mat-card-actions>
+        <div class="m-auto">{{ book.price | currency:"RUB":"₽" }}</div>
+        <button class="m-auto" mat-raised-button color="primary" (click)="addToCart(book)"> Add to cart
+        </button>
+    </mat-card-actions>
+</mat-card>

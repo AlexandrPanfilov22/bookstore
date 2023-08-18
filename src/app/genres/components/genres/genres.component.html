@@ -1,0 +1,17 @@
+<div *ngIf="genres$ | async as genres; else noneGenres">
+    <app-genres-list [genres]="genres"></app-genres-list>
+
+    <mat-paginator
+            class="background-primary"
+            [length]="totalItems"
+            [pageSizeOptions]="_pageSizeOptions"
+            (page)="pageEvent($event)"
+            [pageIndex]="pageIndex">
+    </mat-paginator>
+</div>
+
+<ng-template #noneGenres>
+    <div class="d-flex justify-content-center">
+        <mat-spinner diameter="200" strokeWidth="5"></mat-spinner>
+    </div>
+</ng-template>

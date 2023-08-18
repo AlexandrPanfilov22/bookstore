@@ -1,0 +1,40 @@
+<mat-card class="p-15 text-center create-card">
+    <mat-card-title>
+        <h2 class="mb-10">Make Order</h2>
+    </mat-card-title>
+    <mat-card-content>
+        <form class="d-flex flex-column" [formGroup]="orderForm">
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput
+                       formControlName="city"
+                       class="text-center"
+                       type="text"/>
+                <mat-error *ngIf="city.errors?.['required']">City is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Address</mat-label>
+                <input matInput
+                       formControlName="address"
+                       class="text-center"
+                       type="text"/>
+                <mat-error *ngIf="address.errors?.['required']">Address is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Zipcode</mat-label>
+                <input matInput
+                       formControlName="zipcode"
+                       inputNumberMask
+                       class="text-center"
+                       type="text"/>
+                <mat-spinner *ngIf="zipCode.pending && zipCode.dirty"
+                             matSuffix diameter="18"
+                             class="mr-10"></mat-spinner>
+                <mat-error *ngIf="zipCode.errors?.['zipcode']">Invalid zipcode</mat-error>
+                <mat-error *ngIf="zipCode.errors?.['required']">Zipcode is required</mat-error>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+</mat-card>

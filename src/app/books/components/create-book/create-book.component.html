@@ -1,0 +1,92 @@
+<mat-card class="text-center">
+    <mat-card-title>
+        <h2 class="mb-10">Create Book</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+        <form class="d-flex flex-column" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="mb-30" appearance="fill" hintLabel="Max 25 characters">
+                <mat-label>Title</mat-label>
+                <input matInput
+                       inputLetterMask
+                       maxlength="25"
+                       formControlName="title"
+                       class="text-center"
+                       type="text"/>
+                <mat-hint align="end">{{ title.value.length }}/25</mat-hint>
+                <mat-error *ngIf="title.errors?.['required']">Field is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+                <mat-error *ngIf="description.errors?.['required']">Field is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" floatLabel="always">
+                <mat-label>Price</mat-label>
+                <input matInput
+                       class="price-field"
+                       placeholder="0"
+                       type="number"
+                       formControlName="price"/>
+                <span matTextPrefix>₽</span>
+                <span matTextSuffix>.00</span>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Author</mat-label>
+                <mat-select multiple formControlName="author">
+                    <mat-option *ngFor=" let author of authors$ | async" [value]="author.id">
+                        {{ author | fullName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Genres</mat-label>
+                <mat-select multiple formControlName="genres">
+                    <mat-option *ngFor=" let genre of genres$ | async" [value]="genre.id">
+                        {{ genre.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Writing Date</mat-label>
+                <input matInput
+                       inputNumberMask
+                       formControlName="writingDate"
+                       [matDatepicker]="writingDatePicker">
+                <mat-datepicker-toggle matIconSuffix [for]="writingDatePicker"></mat-datepicker-toggle>
+                <mat-error *ngIf="writingDate.errors?.['required']">Field is required</mat-error>
+                <mat-datepicker #writingDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Release Date</mat-label>
+                <input matInput
+                       inputNumberMask
+                       formControlName="releaseDate"
+                       [matDatepicker]="releaseDatePicker">
+                <mat-datepicker-toggle matIconSuffix [for]="releaseDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #releaseDatePicker></mat-datepicker>
+                <mat-error *ngIf="releaseDate.errors?.['required']">Field is required</mat-error>
+                <mat-error *ngIf="releaseDate.errors?.['dateComparisonGreaterDate']">
+                    Release date cannot be greater than writing date
+                </mat-error>
+            </mat-form-field>
+
+            <div class="mb-30">
+                <app-image-upload formControlName="image" [fileSizeInBytes]="5000000"></app-image-upload>
+                <mat-error *ngIf="image.errors?.['invalidExtension']">Invalid file extension.</mat-error>
+                <mat-error *ngIf="image.errors?.['fileSize']">Max size is 5 Mb.</mat-error>
+            </div>
+
+            <button mat-raised-button
+                    color="primary"
+                    type="submit">Create Book
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

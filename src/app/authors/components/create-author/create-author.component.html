@@ -1,0 +1,35 @@
+<mat-card class="text-center create-card">
+    <mat-card-title>
+        <h2 class="mb-10">Create Author</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+        <form class="d-flex flex-column" [formGroup]="authorForm">
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput
+                       maxlength="25"
+                       formControlName="firstName"
+                       class="text-center"
+                       type="text"/>
+                <mat-error *ngIf="firstName.errors?.['required']">Field is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="mb-30" appearance="fill">
+                <mat-label>Second Name</mat-label>
+                <input matInput
+                       maxlength="25"
+                       formControlName="secondName"
+                       class="text-center"
+                       type="text"/>
+                <mat-error *ngIf="secondName.errors?.['required']">Field is required</mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button
+                    color="primary"
+                    type="submit"
+                    (click)="saveAuthor()">Create Author
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

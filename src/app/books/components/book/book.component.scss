@@ -1,0 +1,22 @@
+.card {
+  height: 100%;
+
+  .card-header-image {
+    background-size: cover;
+  }
+
+  .book-img {
+    width: 260px;
+    align-self: center;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    width: 250px;
+
+    .book-img {
+      width: 220px;
+    }
+  }
+}

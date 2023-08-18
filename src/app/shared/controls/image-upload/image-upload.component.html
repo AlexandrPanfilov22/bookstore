@@ -1,0 +1,8 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <input type="file" class="mb-4 upload-image" (change)="onFileChange($event)">
+    <img *ngIf="dataUrl && !isValidControl"
+         [src]="dataUrl"
+         class="mb-4"
+         width="270"
+         alt="upload-image">
+</div>

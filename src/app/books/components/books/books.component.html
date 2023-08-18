@@ -1,0 +1,45 @@
+<div class="mb-40">
+    <mat-accordion class="mb-40" multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Filters
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-filter-books
+                    [initValueForm]="filterData"
+                    (filterEvent)="getFilter($event)"
+                    (clearFilter)="clearFilter($event)"></app-filter-books>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div class="row mb-50 flex-column">
+    <a class="col-6 col-md-4 align-self-center" routerLink="/books/create" mat-button color="primary">
+        Create Book
+    </a>
+</div>
+
+<div *ngIf="books$ | async as books; else noneBooks">
+    <div class="container">
+        <div class="row">
+            <div *ngFor="let book of books" class="col col-sm-6 col-md-6 col-lg-4 mb-40">
+                <app-book [book]="book"></app-book>
+            </div>
+        </div>
+
+        <mat-paginator
+                class="background-primary"
+                [length]="totalItems"
+                [pageSizeOptions]="_pageSizeOptions"
+                (page)="pageEvent($event)"
+                [pageIndex]="pageIndex">
+        </mat-paginator>
+    </div>
+</div>
+<ng-template #noneBooks>
+    <div class="d-flex justify-content-center">
+        <mat-spinner diameter="200" strokeWidth="5"></mat-spinner>
+    </div>
+</ng-template>

@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-field {
+  text-align: right;
+
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  &::-webkit-outer-spin-button {
+    display: none;
+  }
+}

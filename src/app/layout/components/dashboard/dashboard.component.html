@@ -1,0 +1,24 @@
+<div class="wrapper d-flex flex-column">
+    <app-header (drawer)="drawer.toggle()"></app-header>
+
+    <mat-drawer-container class="wrapper-container" autosize>
+        <mat-drawer #drawer class="mat-drawer" mode="over">
+            <mat-list (click)="drawer.toggle()" class="text-center">
+                <mat-nav-list><a routerLink="/authors" class="nav-link">Authors</a></mat-nav-list>
+                <mat-divider></mat-divider>
+
+                <mat-nav-list><a routerLink="/books" class="nav-link">Books</a></mat-nav-list>
+                <mat-divider></mat-divider>
+
+                <mat-nav-list><a routerLink="/genres" class="nav-link">Genres</a></mat-nav-list>
+                <mat-divider></mat-divider>
+
+                <mat-nav-list><a routerLink="/cart" class="nav-link">Cart</a></mat-nav-list>
+            </mat-list>
+        </mat-drawer>
+
+        <div class="container dashboard-container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
+</div>

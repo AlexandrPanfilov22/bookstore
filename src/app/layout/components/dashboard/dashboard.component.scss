@@ -1,0 +1,29 @@
+@import "../../../../styles/colors";
+
+.dashboard-container {
+  box-sizing: border-box;
+  padding-top: 40px;
+  padding-bottom: 10px;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.wrapper-container {
+  height: 100%;
+
+  .mat-drawer {
+    padding: 20px;
+
+    .nav-link {
+      text-decoration: none;
+      color: $black;
+      font-size: 18px;
+    }
+  }
+}
