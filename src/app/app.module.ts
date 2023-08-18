@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './layout/dashboard.module';
 import { ConvertCaseInterceptor } from './interceptors/convert-case.interceptor';
+import {BaseUrlInterceptor} from "./interceptors/base-url.interceptor";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ConvertCaseInterceptor } from './interceptors/convert-case.interceptor'
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ConvertCaseInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
